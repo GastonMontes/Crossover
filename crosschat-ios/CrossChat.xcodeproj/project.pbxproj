@@ -100,7 +100,6 @@
 		AEEBDC8620F625AC00251E6A /* ContentAnalyser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentAnalyser.swift; sourceTree = "<group>"; };
 		AEEBDC8820F627F100251E6A /* ContentRegex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentRegex.swift; sourceTree = "<group>"; };
 		AEEBDC8A20F6285800251E6A /* TldLists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TldLists.swift; sourceTree = "<group>"; };
-		AEEBDC9420F6446600251E6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEEBDC9F20F7445300251E6A /* ChatManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatManager.swift; sourceTree = "<group>"; };
 		AEEBDCA420F7AB9800251E6A /* TextUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtils.swift; sourceTree = "<group>"; };
 		AEEBDCA620F7B70A00251E6A /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
@@ -372,8 +371,6 @@
 				AEE34B5520F4A0CE00AF7642 /* Sources */,
 				AEE34B5620F4A0CE00AF7642 /* Frameworks */,
 				AEE34B5720F4A0CE00AF7642 /* Resources */,
-				021D1FC75681B05D7C65DFCA /* [CP] Embed Pods Frameworks */,
-				7D01DD344AE141DDABA2FCE4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -496,21 +493,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		021D1FC75681B05D7C65DFCA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CrossChat/Pods-CrossChat-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5D8E2ED23DB58F648C16F557 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -527,21 +509,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		7D01DD344AE141DDABA2FCE4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CrossChat/Pods-CrossChat-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
