@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  CrossChat
+
+  Created by Mahmoud Abdurrahman on 7/12/18.
+  Copyright © 2018 Crossover. All rights reserved.
+*/
+
+"welcome_message" = "Hi, Welcome to <b>CrossChat</b> Message Analyser&#8230;<br /><br />Let\'s have a deal, <b>first</b> you send me a message and I promise to analyse its content the best I can, <b>then</b> I will reply with all my findings as soon as I finish.<br /><br />If there\'re findings I will reply with a JSON object plus a nicely formatted message, otherwise, I will reply only with an empty JSON.<br /><br />I\'m waiting for your messages&#8230; ;)";
+
+
