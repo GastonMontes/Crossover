@@ -347,7 +347,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWz-zu-jiv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fBQ-09-1wu">
                     <connections>
-                        <action selector="dismissKeyboard:" destination="Tfr-hL-Jvo" id="9sL-7V-D6T"/>
+                        <action selector="dismissKeyboardWithSender:" destination="Tfr-hL-Jvo" id="zvB-jK-ebr"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
