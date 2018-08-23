@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="weI-Jr-OCB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="weI-Jr-OCB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Light</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Intro View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -28,11 +23,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crosschat-welcome" translatesAutoresizingMaskIntoConstraints="NO" id="GWO-GW-RZb">
-                                <rect key="frame" x="46" y="72" width="283" height="124"/>
+                                <rect key="frame" x="46" y="80" width="283" height="124"/>
                                 <accessibility key="accessibilityConfiguration" label="Application welcome image"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTu-lq-T3W">
-                                <rect key="frame" x="0.0" y="281" width="375" height="21"/>
+                                <rect key="frame" x="8" y="281" width="359" height="21.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21.5" id="FA1-3N-rEQ"/>
+                                </constraints>
                                 <attributedString key="attributedText">
                                     <fragment content="Welcome to ">
                                         <attributes>
@@ -59,7 +57,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDa-5C-lDL">
-                                <rect key="frame" x="10" y="316.5" width="355" height="74.5"/>
+                                <rect key="frame" x="8" y="317" width="359" height="74.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Let me first introduce my self, I'm the magician behind ">
                                         <attributes>
@@ -107,19 +105,22 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kTu-lq-T3W" secondAttribute="trailing" constant="8" id="3cA-uk-g4g"/>
+                            <constraint firstItem="Xi5-oc-LiO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CDa-5C-lDL" secondAttribute="bottom" constant="16" id="62z-Ai-5X7"/>
                             <constraint firstItem="CDa-5C-lDL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="20" id="75w-sI-Hoy"/>
                             <constraint firstItem="Xi5-oc-LiO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JlQ-g8-iNF"/>
-                            <constraint firstItem="CDa-5C-lDL" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-20" id="LbT-hJ-N0S"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xi5-oc-LiO" secondAttribute="trailing" id="QbQ-kD-nIx"/>
                             <constraint firstItem="GWO-GW-RZb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="T8r-je-a4s"/>
-                            <constraint firstItem="kTu-lq-T3W" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UZp-0F-54a"/>
+                            <constraint firstAttribute="trailing" secondItem="CDa-5C-lDL" secondAttribute="trailing" constant="8" id="TTF-Pa-dTt"/>
                             <constraint firstItem="CDa-5C-lDL" firstAttribute="top" secondItem="kTu-lq-T3W" secondAttribute="bottom" constant="15" id="UiA-vK-44c"/>
-                            <constraint firstItem="GWO-GW-RZb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="VG9-tM-qFU"/>
+                            <constraint firstItem="GWO-GW-RZb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="VG9-tM-qFU"/>
+                            <constraint firstItem="CDa-5C-lDL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="cQ1-gz-tNh"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xi5-oc-LiO" secondAttribute="bottom" constant="20" id="kxC-5g-ijr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GWO-GW-RZb" secondAttribute="trailing" constant="30" id="mzR-Iy-rAA"/>
-                            <constraint firstItem="kTu-lq-T3W" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="oI0-bO-05o"/>
                             <constraint firstItem="CDa-5C-lDL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wMS-01-WF4"/>
                             <constraint firstItem="GWO-GW-RZb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xZB-t3-QaM"/>
+                            <constraint firstItem="kTu-lq-T3W" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GWO-GW-RZb" secondAttribute="bottom" constant="16" id="yLs-jb-opG"/>
+                            <constraint firstItem="kTu-lq-T3W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="ygz-ab-wQZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="J0C-WK-uNG"/>
@@ -128,7 +129,6 @@
                         <outlet property="aboutLabel" destination="CDa-5C-lDL" id="Swh-jS-7fv"/>
                         <outlet property="getStartedButton" destination="Xi5-oc-LiO" id="aP6-2q-ddN"/>
                         <outlet property="logoImage" destination="GWO-GW-RZb" id="fFr-X2-IyU"/>
-                        <outlet property="welcomeCenterConstraint" destination="UZp-0F-54a" id="f2K-Rv-etV"/>
                         <outlet property="welcomeLabel" destination="kTu-lq-T3W" id="KG6-LV-HSP"/>
                         <segue destination="Tfr-hL-Jvo" kind="show" identifier="OpenChatScreenSegue" id="7sU-Ak-wnm"/>
                     </connections>
