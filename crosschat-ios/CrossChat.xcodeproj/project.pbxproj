@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		38016B83212EAD87001F16C8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 38016B82212EAD87001F16C8 /* README.md */; };
 		AE9A226920FA4C1700B30D74 /* ChatScreenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9A226820FA4C1700B30D74 /* ChatScreenUITests.swift */; };
 		AE9A226A20FA9F9800B30D74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEEBDCA620F7B70A00251E6A /* Localizable.strings */; };
 		AEE34B5D20F4A0CE00AF7642 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE34B5C20F4A0CE00AF7642 /* AppDelegate.swift */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		23469317BE92F7C49757787D /* Pods_CrossChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CrossChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		38016B82212EAD87001F16C8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		3DA4BEE33C3E2B4C0079AAE8 /* Pods-CrossChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrossChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CrossChat/Pods-CrossChat.release.xcconfig"; sourceTree = "<group>"; };
 		AE9A226820FA4C1700B30D74 /* ChatScreenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenUITests.swift; sourceTree = "<group>"; };
 		AEE34B5920F4A0CE00AF7642 /* CrossChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrossChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -187,6 +189,7 @@
 		AEE34B5B20F4A0CE00AF7642 /* CrossChat */ = {
 			isa = PBXGroup;
 			children = (
+				38016B82212EAD87001F16C8 /* README.md */,
 				AEE34B8A20F50FCA00AF7642 /* Core */,
 				AEE34B8B20F50FD200AF7642 /* Frontend */,
 				AEE34B5C20F4A0CE00AF7642 /* AppDelegate.swift */,
@@ -470,6 +473,7 @@
 			files = (
 				AEE34B6720F4A0CF00AF7642 /* LaunchScreen.storyboard in Resources */,
 				AEEBDCA720F7B70A00251E6A /* Localizable.strings in Resources */,
+				38016B83212EAD87001F16C8 /* README.md in Resources */,
 				AEE34B6420F4A0CF00AF7642 /* Assets.xcassets in Resources */,
 				AEE34B6220F4A0CF00AF7642 /* Main.storyboard in Resources */,
 			);
