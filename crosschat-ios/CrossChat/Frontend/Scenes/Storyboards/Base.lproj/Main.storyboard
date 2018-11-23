@@ -155,7 +155,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LsM-IT-Zg9" userLabel="Message Background">
-                                                    <rect key="frame" x="55" y="1" width="597" height="68"/>
+                                                    <rect key="frame" x="55" y="1" width="305" height="68"/>
                                                     <color key="backgroundColor" red="0.69411764705882351" green="0.80392156862745101" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -164,7 +164,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-WS-exn">
-                                                    <rect key="frame" x="65" y="11" width="577" height="48"/>
+                                                    <rect key="frame" x="65" y="11" width="285" height="48"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -200,7 +200,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qbd-n7-fbE" userLabel="Message Background">
-                                                    <rect key="frame" x="15" y="1" width="597" height="68"/>
+                                                    <rect key="frame" x="15" y="1" width="305" height="68"/>
                                                     <color key="backgroundColor" red="0.89411764705882346" green="0.95294117647058818" blue="0.69019607843137254" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -209,7 +209,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AH2-PF-jsF">
-                                                    <rect key="frame" x="25" y="11" width="577" height="48"/>
+                                                    <rect key="frame" x="25" y="11" width="285" height="48"/>
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -342,7 +342,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWz-zu-jiv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fBQ-09-1wu">
                     <connections>
-                        <action selector="dismissKeyboard:" destination="Tfr-hL-Jvo" id="9sL-7V-D6T"/>
+                        <action selector="dismissKeyboardWithSender:" destination="Tfr-hL-Jvo" id="Pdz-gO-z0u"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
