@@ -8,6 +8,8 @@
 
 import UIKit
 
+private let kSafeAreaBottomHeight = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+
 class ChatViewController: UIViewController {
     
     // MARK: - IBOutlets
@@ -81,7 +83,7 @@ class ChatViewController: UIViewController {
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        writeMessageBottomConstraint.constant = keyboardFrame.size.height + 0
+        writeMessageBottomConstraint.constant = kSafeAreaBottomHeight - keyboardFrame.size.height
         dismissKeyboardView.isHidden = false
         dismissKeyboardView.alpha = 0.1
         
