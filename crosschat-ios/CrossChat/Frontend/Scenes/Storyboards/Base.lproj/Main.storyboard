@@ -22,14 +22,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="crosschat-welcome" translatesAutoresizingMaskIntoConstraints="NO" id="GWO-GW-RZb">
-                                <rect key="frame" x="46" y="80" width="283" height="124"/>
+                                <rect key="frame" x="46" y="72" width="283" height="124"/>
                                 <accessibility key="accessibilityConfiguration" label="Application welcome image"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kTu-lq-T3W">
-                                <rect key="frame" x="24" y="246.5" width="327" height="42.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21.5" id="FA1-3N-rEQ"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="280" width="375" height="21.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Welcome to ">
                                         <attributes>
@@ -56,7 +53,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CDa-5C-lDL">
-                                <rect key="frame" x="25" y="304" width="325" height="99.5"/>
+                                <rect key="frame" x="10" y="316.5" width="355" height="74.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="Let me first introduce my self, I'm the magician behind ">
                                         <attributes>
@@ -104,22 +101,19 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="kTu-lq-T3W" secondAttribute="trailing" constant="24" id="3cA-uk-g4g"/>
-                            <constraint firstItem="Xi5-oc-LiO" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CDa-5C-lDL" secondAttribute="bottom" constant="16" id="62z-Ai-5X7"/>
                             <constraint firstItem="CDa-5C-lDL" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="20" id="75w-sI-Hoy"/>
                             <constraint firstItem="Xi5-oc-LiO" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JlQ-g8-iNF"/>
+                            <constraint firstItem="CDa-5C-lDL" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" constant="-20" id="LbT-hJ-N0S"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Xi5-oc-LiO" secondAttribute="trailing" id="QbQ-kD-nIx"/>
                             <constraint firstItem="GWO-GW-RZb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="T8r-je-a4s"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CDa-5C-lDL" secondAttribute="trailing" constant="24" id="TTF-Pa-dTt"/>
+                            <constraint firstItem="kTu-lq-T3W" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="UZp-0F-54a"/>
                             <constraint firstItem="CDa-5C-lDL" firstAttribute="top" secondItem="kTu-lq-T3W" secondAttribute="bottom" constant="15" id="UiA-vK-44c"/>
-                            <constraint firstItem="GWO-GW-RZb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="VG9-tM-qFU"/>
-                            <constraint firstItem="CDa-5C-lDL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="cQ1-gz-tNh"/>
+                            <constraint firstItem="GWO-GW-RZb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="VG9-tM-qFU"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Xi5-oc-LiO" secondAttribute="bottom" constant="20" id="kxC-5g-ijr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GWO-GW-RZb" secondAttribute="trailing" constant="30" id="mzR-Iy-rAA"/>
+                            <constraint firstItem="kTu-lq-T3W" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="oI0-bO-05o"/>
                             <constraint firstItem="CDa-5C-lDL" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wMS-01-WF4"/>
                             <constraint firstItem="GWO-GW-RZb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xZB-t3-QaM"/>
-                            <constraint firstItem="kTu-lq-T3W" firstAttribute="top" relation="greaterThanOrEqual" secondItem="GWO-GW-RZb" secondAttribute="bottom" constant="16" id="yLs-jb-opG"/>
-                            <constraint firstItem="kTu-lq-T3W" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="ygz-ab-wQZ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="J0C-WK-uNG"/>
@@ -128,6 +122,7 @@
                         <outlet property="aboutLabel" destination="CDa-5C-lDL" id="Swh-jS-7fv"/>
                         <outlet property="getStartedButton" destination="Xi5-oc-LiO" id="aP6-2q-ddN"/>
                         <outlet property="logoImage" destination="GWO-GW-RZb" id="fFr-X2-IyU"/>
+                        <outlet property="welcomeCenterConstraint" destination="UZp-0F-54a" id="f2K-Rv-etV"/>
                         <outlet property="welcomeLabel" destination="kTu-lq-T3W" id="KG6-LV-HSP"/>
                         <segue destination="Tfr-hL-Jvo" kind="show" identifier="OpenChatScreenSegue" id="7sU-Ak-wnm"/>
                     </connections>
@@ -276,12 +271,12 @@
                                         <rect key="frame" x="327.5" y="18" width="20" height="20"/>
                                         <color key="color" red="0.12549019607843137" green="0.32156862745098036" blue="0.50588235294117645" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </activityIndicatorView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="ZvN-Oy-Mtk">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZvN-Oy-Mtk">
                                         <rect key="frame" x="310" y="7" width="55" height="42"/>
                                         <color key="backgroundColor" red="0.30196078431372547" green="0.29411764705882354" blue="0.49803921568627452" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="RxV-jU-cwu"/>
-                                            <constraint firstAttribute="width" constant="55" id="XjP-wp-xM4"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="55" id="XjP-wp-xM4"/>
                                         </constraints>
                                         <state key="normal" title="Send">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -299,7 +294,6 @@
                                 <color key="backgroundColor" red="0.88430727079097982" green="0.86299750326667324" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="55" id="1se-Aq-9Sf"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="3lK-6O-Dhw"/>
                                     <constraint firstItem="ZjQ-kv-OlH" firstAttribute="leading" secondItem="KAZ-In-07D" secondAttribute="leading" constant="10" id="9uE-e6-QrJ"/>
                                     <constraint firstAttribute="trailing" secondItem="ZvN-Oy-Mtk" secondAttribute="trailing" constant="10" id="A4O-F7-h3R"/>
                                     <constraint firstItem="ZjQ-kv-OlH" firstAttribute="top" secondItem="KAZ-In-07D" secondAttribute="top" constant="7" id="C9t-lr-rk3"/>
@@ -346,7 +340,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWz-zu-jiv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="fBQ-09-1wu">
                     <connections>
-                        <action selector="dismissKeyboardWithSender:" destination="Tfr-hL-Jvo" id="zvB-jK-ebr"/>
+                        <action selector="dismissKeyboard:" destination="Tfr-hL-Jvo" id="9sL-7V-D6T"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>

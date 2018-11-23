@@ -21,12 +21,12 @@ class TextUtils {
             for entity in allEntities {
                 switch entity.type {
                     
-                case .Mention:
+                case .mention:
                     attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: NSMakeRange(entity.start, entity.end - entity.start))
                     break
-                case .Emoticon:
+                case .emoticon:
                     attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: NSMakeRange(entity.start, entity.end - entity.start))
-                case .Url:
+                case .url:
                     attributedString.addAttribute(.foregroundColor, value: UIColor.magenta, range: NSMakeRange(entity.start, entity.end - entity.start))
                 }
             }

@@ -165,7 +165,7 @@ class ContentRegex {
     
     public static let AT_SIGNS = try! NSRegularExpression(pattern: "[" + AT_SIGNS_CHARS + "]", options: [])
     public static let VALID_MENTION = try! NSRegularExpression(pattern: "([^a-z0-9_!#$%&*" + AT_SIGNS_CHARS
-        + "]|^|(?:^|[^a-z0-9_+~.-])RT:?)([" + AT_SIGNS_CHARS + "]+)([a-z0-9_]+)?", options: .caseInsensitive)
+        + "]|^|(?:^|[^a-z0-9_+~.-])RT:?)([" + AT_SIGNS_CHARS + "]+)([a-z0-9_]*)?", options: .caseInsensitive)
     public static let VALID_MENTION_GROUP_BEFORE = 1
     public static let VALID_MENTION_GROUP_AT = 2
     public static let VALID_MENTION_GROUP_USERNAME = 3

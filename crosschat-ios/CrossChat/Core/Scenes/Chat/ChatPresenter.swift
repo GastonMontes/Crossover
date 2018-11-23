@@ -23,8 +23,8 @@ class ChatPresenter: BasePresenter<ChatView>, ChatActions {
         
         var welcomeChatMessage = ChatMessageItem()
         welcomeChatMessage.message = NSLocalizedString("welcome_message", comment: "")
-        welcomeChatMessage.type = .Reply
-        welcomeChatMessage.format = .Html
+        welcomeChatMessage.type = .reply
+        welcomeChatMessage.format = .html
         welcomeChatMessage.date = Date()
         
         addChatMessage(welcomeChatMessage)
@@ -34,7 +34,7 @@ class ChatPresenter: BasePresenter<ChatView>, ChatActions {
         view?.startLoading()
         addSelfMessage(of: messageText)
         analyseChatMessage(of: messageText, completion: {
-            [weak self] () in
+            [weak self] () -> Void in
             self?.view?.finishLoading()
         })
     }
@@ -42,8 +42,8 @@ class ChatPresenter: BasePresenter<ChatView>, ChatActions {
     func addSelfMessage(of text: String) {
         var selfMessage = ChatMessageItem()
         selfMessage.message = text
-        selfMessage.type = .Mine
-        selfMessage.format = .PlainText
+        selfMessage.type = .mine
+        selfMessage.format = .plainText
         selfMessage.date = Date()
         
         addChatMessage(selfMessage)
@@ -57,8 +57,8 @@ class ChatPresenter: BasePresenter<ChatView>, ChatActions {
         } else {
             replyMessage.message = "msg_failed_processing_message"
         }
-        replyMessage.type = .Reply
-        replyMessage.format = .PlainText
+        replyMessage.type = .reply
+        replyMessage.format = .plainText
         replyMessage.date = Date()
     
         addChatMessage(replyMessage)
@@ -80,8 +80,8 @@ class ChatPresenter: BasePresenter<ChatView>, ChatActions {
     
         var replyFormattedMessage = ChatMessageItem()
         replyFormattedMessage.parsedMessage = parsedMessage
-        replyFormattedMessage.type = .Reply
-        replyFormattedMessage.format = .RichText
+        replyFormattedMessage.type = .reply
+        replyFormattedMessage.format = .richText
         replyFormattedMessage.date = Date()
     
         addChatMessage(replyFormattedMessage)

@@ -17,28 +17,16 @@ class ChatManager {
                 let allExtractedEntities = try ContentAnalyser.extractEntitiesWithIndices(from: text)
                 
                 let extractedMentions = allExtractedEntities
-                    .filter { (entity) -> Bool in
-                        return entity.type == .Mention
-                    }
-                    .map { (entity) -> String in
-                        return entity.value
-                }
+                    .filter { $0.type == .mention }
+                    .map { $0.value }
                 
                 let extractedEmoticons = allExtractedEntities
-                    .filter { (entity) -> Bool in
-                        return entity.type == .Emoticon
-                    }
-                    .map { (entity) -> String in
-                        return entity.value
-                }
+                    .filter { $0.type == .emoticon }
+                    .map { $0.value }
                 
                 let extractedLinks = allExtractedEntities
-                    .filter { (entity) -> Bool in
-                        return entity.type == .Url
-                    }
-                    .map { (entity) -> String in
-                        return entity.value
-                }
+                    .filter { $0.type == .url }
+                    .map { $0.value }
                 
                 var parsedMessage = ParsedMessage()
                 

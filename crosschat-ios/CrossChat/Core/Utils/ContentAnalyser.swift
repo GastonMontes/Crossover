@@ -16,16 +16,9 @@ class ContentAnalyser {
      * @return list of extracted entities values
      */
     static func extractEntities(from text: String?) throws -> [String] {
-        var entities = try? extractEntitiesWithIndices(from: text)
+        let entities = try? extractEntitiesWithIndices(from: text)
         
-        var flatEntities = [String]()
-        if entities != nil {
-            for entity in entities! {
-                flatEntities.append(entity.value)
-            }
-        }
-        
-        return flatEntities
+        return entities?.map { $0.value } ?? []
     }
     
     /**
@@ -40,8 +33,6 @@ class ContentAnalyser {
             try entities.append(contentsOf: extractMentionsWithIndices(from: text))
             try entities.append(contentsOf: extractEmoticonsWithIndices(from: text))
             try entities.append(contentsOf: extractURLsWithIndices(from: text))
-            
-            print("no errors thrown")
         } catch let error {
             throw error
         }
@@ -60,16 +51,9 @@ class ContentAnalyser {
         guard let text = text else {
             return []
         }
-        var entities = try? extractMentionsWithIndices(from: text)
+        let entities = try? extractMentionsWithIndices(from: text)
         
-        var extracted = [String]()
-        if entities != nil {
-            for entity in entities! {
-                extracted.append(entity.value)
-            }
-        }
-        
-        return extracted
+        return entities?.map { $0.value } ?? []
     }
 
     /**
@@ -117,7 +101,7 @@ class ContentAnalyser {
             let start = String.UTF16Index(encodedOffset: atCharacterRange.lowerBound)
             let end = String.UTF16Index(encodedOffset: usernameRange.upperBound)
             
-            let mentionEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: username, type: .Mention)
+            let mentionEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: username, type: .mention)
             extracted.append(mentionEntity)
         }
         
@@ -135,16 +119,9 @@ class ContentAnalyser {
         guard let text = text else {
             return []
         }
-        var entities = try? extractEmoticonsWithIndices(from: text)
+        let entities = try? extractEmoticonsWithIndices(from: text)
         
-        var extracted = [String]()
-        if entities != nil {
-            for entity in entities! {
-                extracted.append(entity.value)
-            }
-        }
-        
-        return extracted
+        return entities?.map { $0.value } ?? []
     }
     
     /**
@@ -188,7 +165,7 @@ class ContentAnalyser {
             
             let emoticon = String(text.utf16[emoticonStart..<emoticonEnd])!
             
-            let emoticonEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: emoticon, type: .Emoticon)
+            let emoticonEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: emoticon, type: .emoticon)
             extracted.append(emoticonEntity)
         }
         
@@ -205,16 +182,9 @@ class ContentAnalyser {
         guard let text = text else {
             return []
         }
-        var entities = try? extractURLsWithIndices(from: text)
+        let entities = try? extractURLsWithIndices(from: text)
         
-        var extracted = [String]()
-        if entities != nil {
-            for entity in entities! {
-                extracted.append(entity.value)
-            }
-        }
-        
-        return extracted
+        return entities?.map { $0.value } ?? []
     }
     
     /**
@@ -264,7 +234,7 @@ class ContentAnalyser {
             
             let url = String(text.utf16[start..<end])!
             
-            let urlEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: url, type: .Url)
+            let urlEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: url, type: .url)
             extracted.append(urlEntity)
         }
         

@@ -9,14 +9,14 @@
 import Foundation
 
 enum MessageType: String, Codable {
-    case Mine
-    case Reply
+    case mine
+    case reply
 }
 
 enum MessageFormat: String, Codable {
-    case PlainText
-    case RichText
-    case Html
+    case plainText
+    case richText
+    case html
 }
 
 struct ChatMessageItem: CustomStringConvertible, Codable {

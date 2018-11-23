@@ -28,34 +28,34 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        chatPresenter.attach(this: self)
-        
-        self.tableview.rowHeight = UITableViewAutomaticDimension
-        self.tableview.estimatedRowHeight = 70
-        self.tableview.contentInset = UIEdgeInsets(top: 5.0, left: 0.0, bottom: 60.0, right: 0.0)
-        self.dismissKeyboardView.isHidden = true
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        chatPresenter.onWelcomeMessageRequested()
-    }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-        chatPresenter.detach(this: self)
+        tableview.rowHeight = UITableViewAutomaticDimension
+        tableview.estimatedRowHeight = 70
+        tableview.contentInset = UIEdgeInsets(top: 5.0, left: 0.0, bottom: 60.0, right: 0.0)
+        dismissKeyboardView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        chatPresenter.attach(this: self)
+        chatPresenter.onWelcomeMessageRequested()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         writeMessageView.transform = CGAffineTransform(translationX: 0, y: writeMessageView.bounds.height)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        spring(delay: 0.1) {
-            self.writeMessageView.transform = CGAffineTransform(translationX: 0, y: 0)
+        spring(delay: 0.1) { [weak self] () -> Void in
+            self?.writeMessageView.transform = CGAffineTransform(translationX: 0, y: 0)
         }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        chatPresenter.detach(this: self)
     }
     
     // MARK: - Actions
@@ -73,37 +73,38 @@ class ChatViewController: UIViewController {
     }
     
     func doneEditing(){
-        self.dismissKeyboardView.isHidden = true
-        self.view.endEditing(true)
+        dismissKeyboardView.isHidden = true
+        view.endEditing(true)
     }
     
     @objc func keyboardWillShow(notification: NSNotification) {
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        self.writeMessageBottomConstraint.constant = keyboardFrame.size.height + 0
-        self.dismissKeyboardView.isHidden = false
-        self.dismissKeyboardView.alpha = 0.1
+        writeMessageBottomConstraint.constant = keyboardFrame.size.height + 0
+        dismissKeyboardView.isHidden = false
+        dismissKeyboardView.alpha = 0.1
         
-        UIView.animate(withDuration: 0.3, animations: { () -> Void in
-            self.view.layoutIfNeeded()
+        UIView.animate(withDuration: 0.3, animations: { [weak self] () -> Void in
+            self?.view.layoutIfNeeded()
         })
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        self.writeMessageBottomConstraint.constant = 0
-        self.dismissKeyboardView.isHidden = true
-        UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            self.view.layoutIfNeeded()
+        writeMessageBottomConstraint.constant = 0
+        dismissKeyboardView.isHidden = true
+        UIView.animate(withDuration: 0.1, animations: { [weak self] () -> Void in
+            self?.view.layoutIfNeeded()
         })
     }
     
     func scrollToBottom() {
         // Handle Scrolling
-        self.delay(delayInSeconds: 0.01) { () -> Void in
-            let numberOfRows = self.chatPresenter.chatMessageItems.count
-            let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
-            self.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.bottom, animated: false)
+        delay(delayInSeconds: 1.3) { [weak self] () -> Void in
+            if let numberOfRows = self?.chatPresenter.chatMessageItems.count {
+                let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
+                self?.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.bottom, animated: false)
+            }
         }
     }
     
@@ -137,7 +138,7 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         let messageItem = chatPresenter.chatMessageItems[indexPath.row]
         
         var identifier: String
-        if messageItem.type == .Mine {
+        if messageItem.type == .mine {
             identifier = MyMessageCellIdentifier
         } else {
             identifier = ParserReplyCellIdentifier
@@ -145,9 +146,9 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier) as! ChatMessageCell
         
-        if messageItem.format == .PlainText {
+        if messageItem.format == .plainText {
             cell.messageLabel.text = messageItem.message
-        } else if messageItem.format == .Html{
+        } else if messageItem.format == .html{
             let modifiedFont = NSString(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size: \(cell.messageLabel.font!.pointSize)\">%@</span>" as NSString, messageItem.message ?? "") as String
             
             cell.messageLabel.attributedText = try? NSAttributedString(

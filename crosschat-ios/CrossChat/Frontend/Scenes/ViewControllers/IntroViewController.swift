@@ -20,26 +20,24 @@ class IntroViewController: UIViewController {
     
     fileprivate let introPresenter = IntroPresenter()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        introPresenter.attach(this: self)
-    }
-    
-    deinit {
-        introPresenter.detach(this: self)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.prepareForAnimation()
+        introPresenter.attach(this: self)
+        
+        prepareForAnimation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.animateScreenElementsIn()
+        animateScreenElementsIn()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        introPresenter.detach(this: self)
     }
     
     func prepareForAnimation(){
@@ -59,9 +57,9 @@ class IntroViewController: UIViewController {
 extension IntroViewController: IntroView {
     
     func showNextScreen() {
-        self.animateScreenElementsOut()
-        self.delay(delayInSeconds: 0.4){
-            self.performSegue(withIdentifier: "OpenChatScreenSegue", sender: self)
+        animateScreenElementsOut()
+        delay(delayInSeconds: 0.4) { [weak self] () -> Void in
+            self?.performSegue(withIdentifier: "OpenChatScreenSegue", sender: self)
         }
     }
     
@@ -70,39 +68,39 @@ extension IntroViewController: IntroView {
 extension IntroViewController {
     
     func animateScreenElementsIn(){
-        UIView.animate(withDuration: 0.5) { () -> Void in
-            self.logoImage.alpha = 1
+        UIView.animate(withDuration: 0.5) { [weak self] () -> Void in
+            self?.logoImage.alpha = 1
         }
         
         
-        spring(delay: 0.2) {
-            self.welcomeLabel.transform = CGAffineTransform(translationX: 0, y: 0)
+        spring(delay: 0.2) { [weak self] () -> Void in
+            self?.welcomeLabel.transform = CGAffineTransform(translationX: 0, y: 0)
         }
         
-        spring(delay: 0.4) {
-            self.aboutLabel.transform = CGAffineTransform(translationX: 0, y: 0)
+        spring(delay: 0.4) { [weak self] () -> Void in
+            self?.aboutLabel.transform = CGAffineTransform(translationX: 0, y: 0)
         }
         
         
-        spring(delay: 0.6) {
-            self.getStartedButton.transform = CGAffineTransform(translationX: 0, y: 0)
+        spring(delay: 0.6) { [weak self] () -> Void in
+            self?.getStartedButton.transform = CGAffineTransform(translationX: 0, y: 0)
         }
     }
     
     func animateScreenElementsOut(){
         let xTransform = -1*view.bounds.width
         
-        spring(delay: 0) {
-            self.getStartedButton.transform = CGAffineTransform(translationX: xTransform, y: 0)
-            self.logoImage.alpha = 0
+        spring(delay: 0) { [weak self] () -> Void in
+            self?.getStartedButton.transform = CGAffineTransform(translationX: xTransform, y: 0)
+            self?.logoImage.alpha = 0
         }
         
-        spring(delay: 0.1) {
-            self.aboutLabel.transform = CGAffineTransform(translationX: xTransform, y: 0)
+        spring(delay: 0.1) { [weak self] () -> Void in
+            self?.aboutLabel.transform = CGAffineTransform(translationX: xTransform, y: 0)
         }
         
-        spring(delay: 0.2){
-            self.welcomeLabel.transform = CGAffineTransform(translationX: xTransform, y: 0)
+        spring(delay: 0.2){ [weak self] () -> Void in
+            self?.welcomeLabel.transform = CGAffineTransform(translationX: xTransform, y: 0)
         }
     }
 }

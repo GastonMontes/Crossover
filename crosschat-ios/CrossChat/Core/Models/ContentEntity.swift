@@ -9,9 +9,9 @@
 import Foundation
 
 enum ContentEntityType: String, Codable {
-    case Mention
-    case Emoticon
-    case Url
+    case mention
+    case emoticon
+    case url
 }
 
 struct ContentEntity: Codable {
