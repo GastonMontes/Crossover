@@ -6,7 +6,7 @@ CrossChat is an iOS Chat Analyzer Bot application created by Crossover team. The
 You can consider the following points as requirements, so, please give them your attention!
 
 1. &commat;mentions - A way to mention a user. Always starts with an '@' followed by at least a single word character and ends when hitting a non-word character.
-2. &num;hashtags **(To be implemented)** - Metadata tags which allow users to apply dynamic, user-generated tagging. Always starts with a '#' followed by at a least single word character and ends when hitting a non-word character.
+2. &num;hashtags **(To be implemented)** - Metadata tags which allow users to apply dynamic, user-generated tagging. Always starts with a '#' followed by at least a single word character and ends when hitting a non-word character.
 3. Emoticons - We only considers 'custom' emoticons which are alphanumeric strings, no longer than 15 characters, and contained in parentheses. Anything matching this criteria is an emoticon, for example, (smile), (cool), (megusta), (john), and (doe).
 4. Links - Any URLs contained in the message.
 
@@ -37,11 +37,17 @@ Returns (`JSON`):
     "megusta",
     "coffee"
   ],
-  "urls": [
+  "links": [
     "https://google.com/"
   ]
 }
 ```
+
+Please make sure that you use an exact similar `JSON` keys (case-sensitive) as shown through the examples above and highlighted in below points:
+1. `"mentions"` `JSON` key for all extracted @mentions
+2. `"hashtags"` `JSON` key for all extracted #hashtags
+3. `"emoticons"` `JSON` key for all extracted (emoticons)
+4. `"links"` `JSON` key for all extracted https://links.com
 
 ## Notes
 - The application should work properly in both Portrait and Landscape modes.
@@ -51,9 +57,8 @@ Returns (`JSON`):
 
 ## Tasks
 1. Find bugs and fix them, please do not spend your valuable time on structure modifications, focus on fixing bugs.
-2. Refactor ContentAnalyser and all of the Model classes.
-3. Find and fix the memory leak inside ChatMessageController class.
-4. Implement #hashtags feature including all necessary unit tests.
+2. Find and fix the memory leak inside ChatMessageController class.
+3. Implement #hashtags feature including all necessary unit tests.
 
 **PLEASE NOTE THAT ALL THE TASKS LISTED ABOVE ARE MANDATORY.**
 
