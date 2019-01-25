@@ -9,6 +9,7 @@
 import UIKit
 
 private let kSafeAreaBottomHeight = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+private let kTableViewDefaultInsets = UIEdgeInsets(top: 4.0, left: 0.0, bottom: 4.0, right: 0.0)
 
 class ChatViewController: UIViewController {
     
@@ -32,7 +33,7 @@ class ChatViewController: UIViewController {
         
         tableview.rowHeight = UITableViewAutomaticDimension
         tableview.estimatedRowHeight = 70
-        tableview.contentInset = UIEdgeInsets(top: 4.0, left: 0.0, bottom: 4.0, right: 0.0)
+        tableview.contentInset = kTableViewDefaultInsets
         dismissKeyboardView.isHidden = true
     }
     
@@ -72,6 +73,8 @@ class ChatViewController: UIViewController {
     
     @IBAction func dismissKeyboard(sender: UITapGestureRecognizer) {
         doneEditing()
+        
+        self.tableview.tableViewScrollToLasVisibleCell()
     }
     
     func doneEditing(){
@@ -79,32 +82,36 @@ class ChatViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @objc func keyboardWillShow(notification: NSNotification) {
-        let info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-        writeMessageBottomConstraint.constant = kSafeAreaBottomHeight - keyboardFrame.size.height
-        dismissKeyboardView.isHidden = false
-        dismissKeyboardView.alpha = 0.1
-        
-        UIView.animate(withDuration: 0.3, animations: { [weak self] () -> Void in
-            self?.view.layoutIfNeeded()
-        })
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        writeMessageBottomConstraint.constant = 0
-        dismissKeyboardView.isHidden = true
-        UIView.animate(withDuration: 0.1, animations: { [weak self] () -> Void in
-            self?.view.layoutIfNeeded()
-        })
-    }
-    
     func scrollToBottom() {
         // Handle Scrolling
         let numberOfRows = self.chatPresenter.chatMessageItems.count
         let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
         self.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+    }
+    
+    // MARK: - Keyboard functions.
+    @objc func keyboardWillHide(notification: NSNotification) {
+        writeMessageBottomConstraint.constant = 0
+        dismissKeyboardView.isHidden = true
+        
+        UIView.animate(withDuration: 0.1, animations: { [weak self] () -> Void in
+            self?.view.layoutIfNeeded()
+        })
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        
+        writeMessageBottomConstraint.constant = kSafeAreaBottomHeight - keyboardSize.height
+        dismissKeyboardView.isHidden = false
+        dismissKeyboardView.alpha = 0.1
+        
+        UIView.animate(withDuration: 0.3, animations: { [weak self] () -> Void in
+            self?.view.layoutIfNeeded()
+            
+            self?.tableview.tableViewScrollToLasVisibleCell()
+        })
     }
 }
 

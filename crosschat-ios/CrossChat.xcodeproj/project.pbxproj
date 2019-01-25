@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84AE567621FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */; };
+		84AE567721FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */; };
+		84AE567821FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */; };
 		AE9A226920FA4C1700B30D74 /* ChatScreenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9A226820FA4C1700B30D74 /* ChatScreenUITests.swift */; };
 		AE9A226A20FA9F9800B30D74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEEBDCA620F7B70A00251E6A /* Localizable.strings */; };
 		AED065AB214092E0002D5BF2 /* LeakInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED065AA214092E0002D5BF2 /* LeakInspector.swift */; };
@@ -72,6 +75,7 @@
 /* Begin PBXFileReference section */
 		23469317BE92F7C49757787D /* Pods_CrossChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CrossChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA4BEE33C3E2B4C0079AAE8 /* Pods-CrossChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrossChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CrossChat/Pods-CrossChat.release.xcconfig"; sourceTree = "<group>"; };
+		84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Scroll.swift"; sourceTree = "<group>"; };
 		AE9A226820FA4C1700B30D74 /* ChatScreenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenUITests.swift; sourceTree = "<group>"; };
 		AED065AA214092E0002D5BF2 /* LeakInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakInspector.swift; sourceTree = "<group>"; };
 		AED065AC2140931D002D5BF2 /* LeakInspectorAlertProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakInspectorAlertProvider.swift; sourceTree = "<group>"; };
@@ -297,6 +301,7 @@
 			children = (
 				AED065A9214092C1002D5BF2 /* LeakInspector */,
 				AEEBDCA420F7AB9800251E6A /* TextUtils.swift */,
+				84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				AED065AB214092E0002D5BF2 /* LeakInspector.swift in Sources */,
 				AEEBDC8420F60F4500251E6A /* ChatPresenter.swift in Sources */,
 				AEEBDC8B20F6285800251E6A /* TldLists.swift in Sources */,
+				84AE567621FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */,
 				AEEBDC7C20F60A3A00251E6A /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -564,6 +570,7 @@
 			files = (
 				AEEBDCB420F7DAEA00251E6A /* ParsedMessage.swift in Sources */,
 				AEEBDCAD20F7DA7B00251E6A /* ContentAnalyserURLsTests.swift in Sources */,
+				84AE567721FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */,
 				AEEBDCB120F7DADE00251E6A /* ContentAnalyser.swift in Sources */,
 				AEEBDCB620F7DAF600251E6A /* ChatManager.swift in Sources */,
 				AEEBDCAF20F7DA9300251E6A /* ContentAnalyserAdvancedEntitiesTests.swift in Sources */,
@@ -582,6 +589,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEE34B7D20F4A0CF00AF7642 /* IntroScreenUITests.swift in Sources */,
+				84AE567821FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */,
 				AE9A226920FA4C1700B30D74 /* ChatScreenUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
