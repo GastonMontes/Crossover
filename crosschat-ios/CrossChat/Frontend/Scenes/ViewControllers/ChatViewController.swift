@@ -8,7 +8,6 @@
 
 import UIKit
 
-private let kSafeAreaBottomHeight = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
 private let kTableViewDefaultInsets = UIEdgeInsets(top: 4.0, left: 0.0, bottom: 4.0, right: 0.0)
 
 class ChatViewController: UIViewController {
@@ -103,7 +102,9 @@ class ChatViewController: UIViewController {
         let info = notification.userInfo!
         let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
         
-        writeMessageBottomConstraint.constant = kSafeAreaBottomHeight - keyboardSize.height
+        let safeAreaBottomHeight = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
+        
+        writeMessageBottomConstraint.constant = safeAreaBottomHeight - keyboardSize.height
         dismissKeyboardView.isHidden = false
         dismissKeyboardView.alpha = 0.1
         
