@@ -32,7 +32,7 @@ class ChatViewController: UIViewController {
         
         tableview.rowHeight = UITableViewAutomaticDimension
         tableview.estimatedRowHeight = 70
-        tableview.contentInset = UIEdgeInsets(top: 5.0, left: 0.0, bottom: 60.0, right: 0.0)
+        tableview.contentInset = UIEdgeInsets(top: 4.0, left: 0.0, bottom: 4.0, right: 0.0)
         dismissKeyboardView.isHidden = true
     }
     
@@ -102,14 +102,10 @@ class ChatViewController: UIViewController {
     
     func scrollToBottom() {
         // Handle Scrolling
-        delay(delayInSeconds: 1.3) { [weak self] () -> Void in
-            if let numberOfRows = self?.chatPresenter.chatMessageItems.count {
-                let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
-                self?.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.bottom, animated: false)
-            }
-        }
+        let numberOfRows = self.chatPresenter.chatMessageItems.count
+        let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
+        self.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
     }
-    
 }
 
 extension ChatViewController: ChatView {
@@ -128,6 +124,7 @@ extension ChatViewController: ChatView {
     
     func updateChatView() {
         tableview.reloadData()
+        self.scrollToBottom()
     }
 }
 
