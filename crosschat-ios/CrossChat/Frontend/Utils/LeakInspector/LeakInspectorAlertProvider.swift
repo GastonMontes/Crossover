@@ -23,7 +23,7 @@ import UIKit
         let ok = "OK"
         
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: ok, style: UIAlertActionStyle.default, handler: nil))
+        alertController.addAction(UIAlertAction(title: ok, style: UIAlertAction.Style.default, handler: nil))
         alertController.show()
         self.alertController = alertController
     }

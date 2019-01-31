@@ -30,7 +30,7 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableview.rowHeight = UITableViewAutomaticDimension
+        tableview.rowHeight = UITableView.automaticDimension
         tableview.estimatedRowHeight = 70
         tableview.contentInset = kTableViewDefaultInsets
         dismissKeyboardView.isHidden = true
@@ -42,8 +42,8 @@ class ChatViewController: UIViewController {
         chatPresenter.attach(this: self)
         chatPresenter.onWelcomeMessageRequested()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name:UIResponder.keyboardWillHideNotification, object: nil)
         
         writeMessageView.transform = CGAffineTransform(translationX: 0, y: writeMessageView.bounds.height)
     }
@@ -66,6 +66,8 @@ class ChatViewController: UIViewController {
             doneEditing()
             if let message = messageTextView.text {
                 chatPresenter.onChatMessageSubmitted(messageText: message)
+
+                message.stringAnalyzeChatMessage()
             }
         }
     }
@@ -76,7 +78,7 @@ class ChatViewController: UIViewController {
         self.tableview.tableViewScrollToLasVisibleCell()
     }
     
-    func doneEditing(){
+    func doneEditing() {
         dismissKeyboardView.isHidden = true
         view.endEditing(true)
     }
@@ -85,7 +87,7 @@ class ChatViewController: UIViewController {
         // Handle Scrolling
         let numberOfRows = self.chatPresenter.chatMessageItems.count
         let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
-        self.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)
+        self.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
     }
     
     // MARK: - Keyboard functions.
@@ -100,7 +102,7 @@ class ChatViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         let info = notification.userInfo!
-        let keyboardSize = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        let keyboardSize = (info[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
         
         let safeAreaBottomHeight = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
         
