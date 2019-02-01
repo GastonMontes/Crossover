@@ -87,7 +87,7 @@ class ContentAnalyser {
             
             // Getting mentioned username
             let usernameRange = match.range(at: ContentRegex.VALID_MENTION_GROUP_USERNAME)
-            if usernameRange.location == NSNotFound {
+            if usernameRange.location == NSNotFound || usernameRange.length == 0 {
                 continue
             }
             
@@ -243,7 +243,7 @@ class ContentAnalyser {
     }
     
     /**
-     * Extract @hashtag references from a given text. A hashtag is an occurrence of
+     * Extract #hashtag references from a given text. A hashtag is an occurrence of
      * #hashtag anywhere in a message text.
      *
      * @param text of the message from which to extract mentions
@@ -272,7 +272,7 @@ class ContentAnalyser {
             }
             
             let hashtagWordRange = match.range(at: ContentRegex.VALID_HASHTAG_GROUP_WORD)
-            if hashtagWordRange.location == NSNotFound {
+            if hashtagWordRange.location == NSNotFound || hashtagWordRange.length == 0 {
                 continue
             }
             
