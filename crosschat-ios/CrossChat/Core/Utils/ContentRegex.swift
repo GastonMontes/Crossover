@@ -170,6 +170,11 @@ class ContentRegex {
     public static let VALID_MENTION_GROUP_AT = 2
     public static let VALID_MENTION_GROUP_USERNAME = 3
     
+    public static let HASHTAG_SIGN_CHAR = "#"
+    public static let VALID_HASHTAG = try! NSRegularExpression(pattern: "([^a-z0-9_!#$%&*" + HASHTAG_SIGN_CHAR + "]|^|(?:^|[^a-z0-9_+~.-])RT:?)([" + HASHTAG_SIGN_CHAR + "]+)([a-z0-9_]*)?", options: [.caseInsensitive])
+    public static let VALID_HASHTAG_GROUP_AT = 2
+    public static let VALID_HASHTAG_GROUP_WORD = 3
+    
     public static let VALID_EMOTICON = try! NSRegularExpression(pattern: "(\\()([a-z0-9]{1,})(\\))", options: .caseInsensitive)
     public static let VALID_EMOTICON_GROUP_LEFT_PAREN = 1
     public static let VALID_EMOTICON_GROUP_VALUE = 2

@@ -66,8 +66,6 @@ class ChatViewController: UIViewController {
             doneEditing()
             if let message = messageTextView.text {
                 chatPresenter.onChatMessageSubmitted(messageText: message)
-
-                message.stringAnalyzeChatMessage()
             }
         }
     }

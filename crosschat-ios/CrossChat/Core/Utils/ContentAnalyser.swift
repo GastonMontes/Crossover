@@ -33,6 +33,7 @@ class ContentAnalyser {
             try entities.append(contentsOf: extractMentionsWithIndices(from: text))
             try entities.append(contentsOf: extractEmoticonsWithIndices(from: text))
             try entities.append(contentsOf: extractURLsWithIndices(from: text))
+            try entities.append(contentsOf: extractHashtagWithIndices(from: text))
         } catch let error {
             throw error
         }
@@ -236,6 +237,57 @@ class ContentAnalyser {
             
             let urlEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: url, type: .url)
             extracted.append(urlEntity)
+        }
+        
+        return extracted
+    }
+    
+    /**
+     * Extract @hashtag references from a given text. A hashtag is an occurrence of
+     * #hashtag anywhere in a message text.
+     *
+     * @param text of the message from which to extract mentions
+     * @return List of {@link ContentEntity} of type {@link ContentEntityType}, having
+     * info about start index, end index, and value of the referenced mention (without the leading
+     * # sign)
+     */
+    static func extractHashtagWithIndices(from text: String?) throws -> [ContentEntity] {
+        guard let text = text else {
+            return []
+        }
+        
+        // Performance optimization.
+        // If text doesn't contain # at all, the text doesn't
+        // contain #hashtag. So we can simply return an empty list.
+        if (text.isEmpty || !text.contains("#")) {
+            return []
+        }
+        
+        var extracted = [ContentEntity]()
+        let matches = ContentRegex.VALID_HASHTAG.matches(in: text, range: NSMakeRange(0, text.utf16.count))
+        
+        for match in matches {
+            if (match.numberOfRanges < ContentRegex.VALID_HASHTAG_GROUP_WORD + 1) {
+                continue
+            }
+            
+            let hashtagWordRange = match.range(at: ContentRegex.VALID_HASHTAG_GROUP_WORD)
+            if hashtagWordRange.location == NSNotFound {
+                continue
+            }
+            
+            let hashtagWordStart = String.UTF16Index(encodedOffset: hashtagWordRange.lowerBound)
+            let hashtagWordEnd = String.UTF16Index(encodedOffset: hashtagWordRange.upperBound)
+            
+            let hashtag = String(text.utf16[hashtagWordStart..<hashtagWordEnd])!
+            
+            let atHashtagCharacterRange = match.range(at: ContentRegex.VALID_HASHTAG_GROUP_AT)
+            
+            let start = String.UTF16Index(encodedOffset: atHashtagCharacterRange.lowerBound)
+            let end = String.UTF16Index(encodedOffset: hashtagWordRange.upperBound)
+            
+            let mentionEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: hashtag, type: .mention)
+            extracted.append(mentionEntity)
         }
         
         return extracted
