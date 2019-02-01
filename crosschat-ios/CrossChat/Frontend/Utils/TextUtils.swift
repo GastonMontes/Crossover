@@ -24,10 +24,15 @@ class TextUtils {
                 case .mention:
                     attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: NSMakeRange(entity.start, entity.end - entity.start))
                     break
+                case .hashtag:
+                    attributedString.addAttribute(.foregroundColor, value: UIColor.green, range: NSMakeRange(entity.start, entity.end - entity.start))
+                    break
                 case .emoticon:
                     attributedString.addAttribute(.foregroundColor, value: UIColor.blue, range: NSMakeRange(entity.start, entity.end - entity.start))
+                    break
                 case .url:
                     attributedString.addAttribute(.foregroundColor, value: UIColor.magenta, range: NSMakeRange(entity.start, entity.end - entity.start))
+                    break
                 }
             }
         }

@@ -286,7 +286,7 @@ class ContentAnalyser {
             let start = String.UTF16Index(encodedOffset: atHashtagCharacterRange.lowerBound)
             let end = String.UTF16Index(encodedOffset: hashtagWordRange.upperBound)
             
-            let mentionEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: hashtag, type: .mention)
+            let mentionEntity = ContentEntity(start: start.encodedOffset, end: end.encodedOffset, value: hashtag, type: .hashtag)
             extracted.append(mentionEntity)
         }
         

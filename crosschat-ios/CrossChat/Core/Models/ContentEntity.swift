@@ -12,6 +12,7 @@ enum ContentEntityType: String, Codable {
     case mention
     case emoticon
     case url
+    case hashtag
 }
 
 struct ContentEntity: Codable {
