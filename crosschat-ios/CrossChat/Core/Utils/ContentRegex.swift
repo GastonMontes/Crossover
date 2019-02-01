@@ -20,21 +20,6 @@ class ContentRegex {
             TldLists.CTLDS.joined(separator:"|") +
     ")(?=[^\\p{Alnum}@]|$))"
     
-    private static let UNICODE_SPACES = "[" +
-        "\\u0009-\\u000d" +     //  # White_Space # Cc   [5] <control-0009>..<control-000D>
-        "\\u0020" +             // White_Space # Zs       SPACE
-        "\\u0085" +             // White_Space # Cc       <control-0085>
-        "\\u00a0" +             // White_Space # Zs       NO-BREAK SPACE
-        "\\u1680" +             // White_Space # Zs       OGHAM SPACE MARK
-        "\\u180E" +             // White_Space # Zs       MONGOLIAN VOWEL SEPARATOR
-        "\\u2000-\\u200a" +     // # White_Space # Zs  [11] EN QUAD..HAIR SPACE
-        "\\u2028" +             // White_Space # Zl       LINE SEPARATOR
-        "\\u2029" +             // White_Space # Zp       PARAGRAPH SEPARATOR
-        "\\u202F" +             // White_Space # Zs       NARROW NO-BREAK SPACE
-        "\\u205F" +             // White_Space # Zs       MEDIUM MATHEMATICAL SPACE
-        "\\u3000" +             // White_Space # Zs       IDEOGRAPHIC SPACE
-    "]"
-    
     private static let CYRILLIC_CHARS = "\\u0400-\\u04FF" // Cyrillic
     
     private static let LATIN_ACCENTS_CHARS =
@@ -159,18 +144,15 @@ class ContentRegex {
     
     private static let RTL_CHARS = "\\u0600-\\u06FF\\u0750-\\u077F\\u0590-\\u05FF\\uFE70-\\uFEFF"
     private static let AT_SIGNS_CHARS = "@"
+    private static let HASHTAG_SIGN_CHAR = "#"
     
     /* Begin public constants */
-    public static let RTL_CHARACTERS = try! NSRegularExpression(pattern: "[" + RTL_CHARS + "]", options: [])
-    
-    public static let AT_SIGNS = try! NSRegularExpression(pattern: "[" + AT_SIGNS_CHARS + "]", options: [])
     public static let VALID_MENTION = try! NSRegularExpression(pattern: "([^a-z0-9_!#$%&*" + AT_SIGNS_CHARS
         + "]|^|(?:^|[^a-z0-9_+~.-])RT:?)([" + AT_SIGNS_CHARS + "]+)([a-z0-9_]*)?", options: .caseInsensitive)
     public static let VALID_MENTION_GROUP_BEFORE = 1
     public static let VALID_MENTION_GROUP_AT = 2
     public static let VALID_MENTION_GROUP_USERNAME = 3
     
-    public static let HASHTAG_SIGN_CHAR = "#"
     public static let VALID_HASHTAG = try! NSRegularExpression(pattern: "([^a-z0-9_!#$%&*" + HASHTAG_SIGN_CHAR + "]|^|(?:^|[^a-z0-9_+~.-])RT:?)([" + HASHTAG_SIGN_CHAR + "]+)([a-z0-9_]*)?", options: [.caseInsensitive])
     public static let VALID_HASHTAG_GROUP_AT = 2
     public static let VALID_HASHTAG_GROUP_WORD = 3
