@@ -13,6 +13,8 @@ struct ParsedMessage: Codable {
     var rawMessage: String? = nil
     var mentions: [String]? = nil
     var emoticons: [String]? = nil
+    var hashtags: [String]? = nil
+    
     var links: [String]? = nil
     var allEntities: [ContentEntity]? = nil
     
@@ -20,6 +22,7 @@ struct ParsedMessage: Codable {
         case mentions
         case emoticons
         case links
+        case hashtags
     }
 }
 

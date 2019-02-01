@@ -28,18 +28,30 @@ class ChatManager {
                     .filter { $0.type == .url }
                     .map { $0.value }
                 
+                let extractedHashtags = allExtractedEntities
+                    .filter { $0.type == .hashtag }
+                    .map { $0.value }
+                
                 var parsedMessage = ParsedMessage()
                 
                 parsedMessage.rawMessage = text
+                
                 if (!extractedMentions.isEmpty) {
                     parsedMessage.mentions = extractedMentions
                 }
+                
                 if (!extractedEmoticons.isEmpty) {
                     parsedMessage.emoticons = extractedEmoticons
                 }
+                
                 if (!extractedLinks.isEmpty) {
                     parsedMessage.links = extractedLinks
                 }
+                
+                if (!extractedHashtags.isEmpty) {
+                    parsedMessage.hashtags = extractedHashtags
+                }
+                
                 parsedMessage.allEntities = allExtractedEntities
                 
                 DispatchQueue.main.sync {
