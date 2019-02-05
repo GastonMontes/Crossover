@@ -9,6 +9,15 @@
 import Foundation
 
 extension String {
+    static func stringGetWelcomeMessage() -> ChatMessageItem {
+        var welcomeChatMessage = ChatMessageItem()
+        welcomeChatMessage.message = NSLocalizedString("welcome_message", comment: "")
+        welcomeChatMessage.type = .reply
+        welcomeChatMessage.format = .html
+        welcomeChatMessage.date = Date()
+        return welcomeChatMessage
+    }
+    
     func stringGetSelfChatMesage() -> ChatMessageItem {
         var selfMessage = ChatMessageItem()
         selfMessage.message = self

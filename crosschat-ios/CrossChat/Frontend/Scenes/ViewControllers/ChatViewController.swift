@@ -34,6 +34,7 @@ class ChatViewController: UIViewController {
         super.viewDidLoad()
         
         self.setupChatTableView()
+        self.chatMessagesItems.append(String.stringGetWelcomeMessage())
         
         self.dismissKeyboardView.isHidden = true
     }
@@ -59,21 +60,6 @@ class ChatViewController: UIViewController {
         spring(delay: 0.1) { [weak self] () -> Void in
             self?.writeMessageView.transform = CGAffineTransform(translationX: 0, y: 0)
         }
-    }
-    
-    deinit {
-        chatPresenter.detach(this: self)
-    }
-    
-    // MARK: - Messages functions.
-    private func createWelcomeMessage() {
-        var welcomeChatMessage = ChatMessageItem()
-        welcomeChatMessage.message = NSLocalizedString("welcome_message", comment: "")
-        welcomeChatMessage.type = .reply
-        welcomeChatMessage.format = .html
-        welcomeChatMessage.date = Date()
-        
-        self.chatMessagesItems.append(welcomeChatMessage)
     }
     
     // MARK: - Notifications functions.
