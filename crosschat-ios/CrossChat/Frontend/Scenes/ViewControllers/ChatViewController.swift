@@ -24,28 +24,34 @@ class ChatViewController: UIViewController {
     let MyMessageCellIdentifier = "MyMessageCell"
     let ParserReplyCellIdentifier = "ParserReplyCell"
     
+    // TODO: - Gaston - Eliminar el chat presenter.
     fileprivate let chatPresenter = ChatPresenter()
+    
+    private var chatMessagesItems = [ChatMessageItem]()
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableview.rowHeight = UITableView.automaticDimension
-        tableview.estimatedRowHeight = 70
-        tableview.contentInset = kTableViewDefaultInsets
+        self.setupChatTableView()
+        
         dismissKeyboardView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        chatPresenter.attach(this: self)
-        chatPresenter.onWelcomeMessageRequested()
+        self.chatPresenter.attach(this: self)
+        self.chatPresenter.onWelcomeMessageRequested()
+        self.createWelcomeMessage()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name:UIResponder.keyboardWillHideNotification, object: nil)
+        self.registerAsKeyboardObserver()
         
         writeMessageView.transform = CGAffineTransform(translationX: 0, y: writeMessageView.bounds.height)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.registerAsKeyboardObserver()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -56,42 +62,62 @@ class ChatViewController: UIViewController {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self)
         chatPresenter.detach(this: self)
+    }
+    
+    // MARK: - Messages functions.
+    private func createWelcomeMessage() {
+        var welcomeChatMessage = ChatMessageItem()
+        welcomeChatMessage.message = NSLocalizedString("welcome_message", comment: "")
+        welcomeChatMessage.type = .reply
+        welcomeChatMessage.format = .html
+        welcomeChatMessage.date = Date()
+        
+        self.chatMessagesItems.append(welcomeChatMessage)
+    }
+    
+    // MARK: - Notifications functions.
+    private func registerAsKeyboardObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillHide(notification:)), name:UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    private func removeAsKeyboardObserver() {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    // MARK: - Chat tableview functions.
+    private func setupChatTableView() {
+        self.tableview.rowHeight = UITableView.automaticDimension
+        self.tableview.estimatedRowHeight = 70
+        self.tableview.contentInset = kTableViewDefaultInsets
+    }
+    
+    func scrollToBottom() {
+        guard self.chatMessagesItems.count > 0 else {
+            return
+        }
+        
+        let numberOfRows = self.chatMessagesItems.count
+        let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
+        self.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
     }
     
     // MARK: - Actions
     @IBAction func sendTapped() {
-        if messageTextView.text != "" {
-            doneEditing()
-            if let message = messageTextView.text {
+        if self.messageTextView.text != "" {
+            self.doneEditing()
+            
+            if let message = self.messageTextView.text {
                 chatPresenter.onChatMessageSubmitted(messageText: message)
             }
         }
     }
     
-    @IBAction func dismissKeyboard(sender: UITapGestureRecognizer) {
-        doneEditing()
-        
-        self.tableview.tableViewScrollToLasVisibleCell()
-    }
-    
-    func doneEditing() {
-        dismissKeyboardView.isHidden = true
-        view.endEditing(true)
-    }
-    
-    func scrollToBottom() {
-        // Handle Scrolling
-        let numberOfRows = self.chatPresenter.chatMessageItems.count
-        let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
-        self.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
-    }
-    
     // MARK: - Keyboard functions.
     @objc func keyboardWillHide(notification: NSNotification) {
-        writeMessageBottomConstraint.constant = 0
-        dismissKeyboardView.isHidden = true
+        self.writeMessageBottomConstraint.constant = 0
+        self.dismissKeyboardView.isHidden = true
         
         UIView.animate(withDuration: 0.1, animations: { [weak self] () -> Void in
             self?.view.layoutIfNeeded()
@@ -104,9 +130,9 @@ class ChatViewController: UIViewController {
         
         let safeAreaBottomHeight = UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0
         
-        writeMessageBottomConstraint.constant = safeAreaBottomHeight - keyboardSize.height
-        dismissKeyboardView.isHidden = false
-        dismissKeyboardView.alpha = 0.1
+        self.writeMessageBottomConstraint.constant = safeAreaBottomHeight - keyboardSize.height
+        self.dismissKeyboardView.isHidden = false
+        self.dismissKeyboardView.alpha = 0.1
         
         UIView.animate(withDuration: 0.3, animations: { [weak self] () -> Void in
             self?.view.layoutIfNeeded()
@@ -114,35 +140,46 @@ class ChatViewController: UIViewController {
             self?.tableview.tableViewScrollToLasVisibleCell()
         })
     }
+    
+    @IBAction func dismissKeyboard(sender: UITapGestureRecognizer) {
+        self.doneEditing()
+        
+        self.tableview.tableViewScrollToLasVisibleCell()
+    }
+    
+    func doneEditing() {
+        self.dismissKeyboardView.isHidden = true
+        self.view.endEditing(true)
+    }
 }
 
 extension ChatViewController: ChatView {
     func startLoading() {
-        messageTextView.text = ""
-        sendButton.isHidden = true
-        sendingActivityIndicator.startAnimating()
-        messageTextView.isUserInteractionEnabled = false
+        self.messageTextView.text = ""
+        self.sendButton.isHidden = true
+        self.sendingActivityIndicator.startAnimating()
+        self.messageTextView.isUserInteractionEnabled = false
     }
     
     func finishLoading() {
-        sendButton.isHidden = false
-        sendingActivityIndicator.stopAnimating()
-        messageTextView.isUserInteractionEnabled = true
+        self.sendButton.isHidden = false
+        self.sendingActivityIndicator.stopAnimating()
+        self.messageTextView.isUserInteractionEnabled = true
     }
     
     func updateChatView() {
-        tableview.reloadData()
+        self.tableview.reloadData()
         self.scrollToBottom()
     }
 }
 
 extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatPresenter.chatMessageItems.count
+        return self.chatMessagesItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messageItem = chatPresenter.chatMessageItems[indexPath.row]
+        let messageItem = self.chatMessagesItems[indexPath.row]
         
         var identifier: String
         if messageItem.type == .mine {
