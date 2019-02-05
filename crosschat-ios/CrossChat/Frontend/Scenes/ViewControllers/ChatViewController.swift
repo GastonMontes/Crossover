@@ -76,16 +76,6 @@ class ChatViewController: UIViewController {
         self.chatMessagesItems.append(welcomeChatMessage)
     }
     
-    private func addSelfMessage(_ messageText: String) {
-        var selfMessage = ChatMessageItem()
-        selfMessage.message = messageText
-        selfMessage.type = .mine
-        selfMessage.format = .plainText
-        selfMessage.date = Date()
-        
-        self.chatMessagesItems.append(selfMessage)
-    }
-    
     // MARK: - Notifications functions.
     private func registerAsKeyboardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification, object: nil)
@@ -120,7 +110,8 @@ class ChatViewController: UIViewController {
         }
         
         self.startLoading()
-        self.addSelfMessage(messageText)
+        
+        self.chatMessagesItems.append(messageText.stringGetSelfChatMesage())
         
         self.chatPresenter.onChatMessageSubmitted(messageText: messageText)
     }

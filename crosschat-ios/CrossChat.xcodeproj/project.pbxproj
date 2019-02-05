@@ -10,6 +10,8 @@
 		84AE567621FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */; };
 		84AE567721FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */; };
 		84AE567821FB54ED0030CA99 /* UITableView+Scroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */; };
+		84F0EF462209C37100998AD6 /* String+ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0EF452209C37100998AD6 /* String+ChatMessage.swift */; };
+		84F0EF472209C37100998AD6 /* String+ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F0EF452209C37100998AD6 /* String+ChatMessage.swift */; };
 		AE9A226920FA4C1700B30D74 /* ChatScreenUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9A226820FA4C1700B30D74 /* ChatScreenUITests.swift */; };
 		AE9A226A20FA9F9800B30D74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AEEBDCA620F7B70A00251E6A /* Localizable.strings */; };
 		AED065AB214092E0002D5BF2 /* LeakInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED065AA214092E0002D5BF2 /* LeakInspector.swift */; };
@@ -76,6 +78,7 @@
 		23469317BE92F7C49757787D /* Pods_CrossChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CrossChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3DA4BEE33C3E2B4C0079AAE8 /* Pods-CrossChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrossChat.release.xcconfig"; path = "Pods/Target Support Files/Pods-CrossChat/Pods-CrossChat.release.xcconfig"; sourceTree = "<group>"; };
 		84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Scroll.swift"; sourceTree = "<group>"; };
+		84F0EF452209C37100998AD6 /* String+ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ChatMessage.swift"; sourceTree = "<group>"; };
 		AE9A226820FA4C1700B30D74 /* ChatScreenUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenUITests.swift; sourceTree = "<group>"; };
 		AED065AA214092E0002D5BF2 /* LeakInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakInspector.swift; sourceTree = "<group>"; };
 		AED065AC2140931D002D5BF2 /* LeakInspectorAlertProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeakInspectorAlertProvider.swift; sourceTree = "<group>"; };
@@ -302,6 +305,7 @@
 				AED065A9214092C1002D5BF2 /* LeakInspector */,
 				AEEBDCA420F7AB9800251E6A /* TextUtils.swift */,
 				84AE567521FB54ED0030CA99 /* UITableView+Scroll.swift */,
+				84F0EF452209C37100998AD6 /* String+ChatMessage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -545,6 +549,7 @@
 				AEE34BA920F5342300AF7642 /* ParsedMessage.swift in Sources */,
 				AED065AD2140931D002D5BF2 /* LeakInspectorAlertProvider.swift in Sources */,
 				AEEBDC7A20F5FF6B00251E6A /* BasePresenter.swift in Sources */,
+				84F0EF462209C37100998AD6 /* String+ChatMessage.swift in Sources */,
 				AEE34B9920F52A1B00AF7642 /* IntroViewController.swift in Sources */,
 				AEEBDCA520F7AB9800251E6A /* TextUtils.swift in Sources */,
 				AEE34B9D20F52A8300AF7642 /* UIViewControllerExtension.swift in Sources */,
@@ -583,6 +588,7 @@
 				AEEBDCB520F7DAEA00251E6A /* ChatMessageItem.swift in Sources */,
 				AEEBDCA920F7DA3C00251E6A /* ContentAnalyserMentionsTests.swift in Sources */,
 				AEEBDCB320F7DAEA00251E6A /* ContentEntity.swift in Sources */,
+				84F0EF472209C37100998AD6 /* String+ChatMessage.swift in Sources */,
 				AEEBDCB020F7DADB00251E6A /* ContentRegex.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
