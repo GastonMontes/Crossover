@@ -35,7 +35,7 @@ class ChatViewController: UIViewController {
         
         self.setupChatTableView()
         
-        dismissKeyboardView.isHidden = true
+        self.dismissKeyboardView.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +76,16 @@ class ChatViewController: UIViewController {
         self.chatMessagesItems.append(welcomeChatMessage)
     }
     
+    private func addSelfMessage(_ messageText: String) {
+        var selfMessage = ChatMessageItem()
+        selfMessage.message = messageText
+        selfMessage.type = .mine
+        selfMessage.format = .plainText
+        selfMessage.date = Date()
+        
+        self.chatMessagesItems.append(selfMessage)
+    }
+    
     // MARK: - Notifications functions.
     private func registerAsKeyboardObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardWillShow(notification:)), name:UIResponder.keyboardWillShowNotification, object: nil)
@@ -105,13 +115,16 @@ class ChatViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func sendTapped() {
-        if self.messageTextView.text != "" {
-            self.doneEditing()
-            
-            if let message = self.messageTextView.text {
-                chatPresenter.onChatMessageSubmitted(messageText: message)
-            }
+        self.doneEditing()
+        
+        guard self.messageTextView.text.count > 0, let messageText = self.messageTextView.text  else {
+            return
         }
+        
+        self.startLoading()
+        self.addSelfMessage(messageText)
+        
+        self.chatPresenter.onChatMessageSubmitted(messageText: messageText)
     }
     
     // MARK: - Keyboard functions.
@@ -143,7 +156,6 @@ class ChatViewController: UIViewController {
     
     @IBAction func dismissKeyboard(sender: UITapGestureRecognizer) {
         self.doneEditing()
-        
         self.tableview.tableViewScrollToLasVisibleCell()
     }
     
