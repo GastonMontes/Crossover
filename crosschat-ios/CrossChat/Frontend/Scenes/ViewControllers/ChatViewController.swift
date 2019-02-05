@@ -104,20 +104,18 @@ class ChatViewController: UIViewController {
     }
     
     func scrollToBottom() {
-        guard self.chatMessagesItems.count > 0 else {
+        guard self.chatMessagesItems.count > 0  else {
             return
         }
         
-        let numberOfRows = self.chatMessagesItems.count
-        let indexPath = NSIndexPath(row: numberOfRows - 1, section: (0))
-        self.tableview.scrollToRow(at: indexPath as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
+        self.tableview.tableViewScrollToBottom(NSIndexPath(row: self.chatMessagesItems.count - 1, section: (0)))
     }
     
     // MARK: - Actions
     @IBAction func sendTapped() {
         self.doneEditing()
         
-        guard self.messageTextView.text.count > 0, let messageText = self.messageTextView.text  else {
+        guard let messageText = self.messageTextView.text, self.messageTextView.text.count > 0 else {
             return
         }
         
@@ -150,13 +148,13 @@ class ChatViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: { [weak self] () -> Void in
             self?.view.layoutIfNeeded()
             
-            self?.tableview.tableViewScrollToLasVisibleCell()
+            self?.tableview.tableViewScrollToLastVisibleCell()
         })
     }
     
     @IBAction func dismissKeyboard(sender: UITapGestureRecognizer) {
         self.doneEditing()
-        self.tableview.tableViewScrollToLasVisibleCell()
+        self.tableview.tableViewScrollToLastVisibleCell()
     }
     
     func doneEditing() {

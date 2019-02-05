@@ -10,9 +10,13 @@ import Foundation
 import UIKit
 
 extension UITableView {
-    func tableViewScrollToLasVisibleCell() {
+    func tableViewScrollToLastVisibleCell() {
         let lastVisibleRow = self.visibleCells.last
         let lastVisibleRowIndex = self.indexPath(for: lastVisibleRow!)
         self.scrollToRow(at: lastVisibleRowIndex!, at: .bottom, animated: true)
+    }
+    
+    func tableViewScrollToBottom(_ index: NSIndexPath) {
+        self.scrollToRow(at: index as IndexPath, at: UITableView.ScrollPosition.bottom, animated: true)
     }
 }
