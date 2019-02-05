@@ -24,9 +24,6 @@ class ChatViewController: UIViewController {
     let MyMessageCellIdentifier = "MyMessageCell"
     let ParserReplyCellIdentifier = "ParserReplyCell"
     
-    // TODO: - Gaston - Eliminar el chat presenter.
-    fileprivate let chatPresenter = ChatPresenter()
-    
     private var chatMessagesItems = [ChatMessageItem]()
     
     // MARK: - View Controller Life Cycle
@@ -42,13 +39,9 @@ class ChatViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.chatPresenter.attach(this: self)
-        self.chatPresenter.onWelcomeMessageRequested()
-        self.createWelcomeMessage()
-        
         self.registerAsKeyboardObserver()
         
-        writeMessageView.transform = CGAffineTransform(translationX: 0, y: writeMessageView.bounds.height)
+        self.writeMessageView.transform = CGAffineTransform(translationX: 0, y: self.writeMessageView.bounds.height)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,12 +72,45 @@ class ChatViewController: UIViewController {
         self.tableview.contentInset = kTableViewDefaultInsets
     }
     
-    func scrollToBottom() {
+    private func scrollToBottom() {
         guard self.chatMessagesItems.count > 0  else {
             return
         }
         
         self.tableview.tableViewScrollToBottom(NSIndexPath(row: self.chatMessagesItems.count - 1, section: (0)))
+    }
+    
+    private func updateTableView() {
+        self.tableview.reloadData()
+        self.scrollToBottom()
+    }
+    
+    // MARK: - Messages functions.
+    private func addSelfChatMessage(message: String) {
+        self.chatMessagesItems.append(message.stringGetSelfChatMesage())
+        self.updateTableView()
+    }
+    
+    private func addJSONChatMessage(message: String) {
+        message.stringGetJSONChatMessage(completion: { [weak self] chatMessageItem in
+            guard let chatMessageItem = chatMessageItem else {
+                return
+            }
+            
+            self?.chatMessagesItems.append(chatMessageItem)
+            self?.updateTableView()
+        })
+    }
+    
+    private func addreplyChatMessage(message: String) {
+        message.stringGetReplyChatMessage(completion: { [weak self] chatMessageItem in
+            guard let chatMessageItem = chatMessageItem else {
+                return
+            }
+            
+            self?.chatMessagesItems.append(chatMessageItem)
+            self?.updateTableView()
+        })
     }
     
     // MARK: - Actions
@@ -97,26 +123,10 @@ class ChatViewController: UIViewController {
         
         self.startLoading()
         
-        // Add rwa message.
-        self.chatMessagesItems.append(messageText.stringGetSelfChatMesage())
+        self.addSelfChatMessage(message: messageText)
+        self.addJSONChatMessage(message: messageText)
+        self.addreplyChatMessage(message: messageText)
         
-        messageText.stringGetJSONChatMessage(completion: { [weak self] chatMessageItem in
-            guard let chatMessageItem = chatMessageItem else {
-                return
-            }
-            
-            self?.chatMessagesItems.append(chatMessageItem)
-        })
-        
-        messageText.stringGetReplyChatMessage(completion: { [weak self] chatMessageItem in
-            guard let chatMessageItem = chatMessageItem else {
-                return
-            }
-            
-            self?.chatMessagesItems.append(chatMessageItem)
-        })
-        
-        self.tableview.reloadData()
         self.finishLoading()
     }
     
@@ -156,9 +166,8 @@ class ChatViewController: UIViewController {
         self.dismissKeyboardView.isHidden = true
         self.view.endEditing(true)
     }
-}
-
-extension ChatViewController: ChatView {
+    
+    // MARK: - Loading functions.
     func startLoading() {
         self.messageTextView.text = ""
         self.sendButton.isHidden = true
@@ -170,11 +179,6 @@ extension ChatViewController: ChatView {
         self.sendButton.isHidden = false
         self.sendingActivityIndicator.stopAnimating()
         self.messageTextView.isUserInteractionEnabled = true
-    }
-    
-    func updateChatView() {
-        self.tableview.reloadData()
-        self.scrollToBottom()
     }
 }
 
@@ -211,18 +215,3 @@ extension ChatViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 }
-
-extension ChatViewController: UITextViewDelegate {
-    
-    func textViewDidBeginEditing(_ textView: UITextView) {
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView){
-        textView.resignFirstResponder()
-    }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        
-    }
-}
-
