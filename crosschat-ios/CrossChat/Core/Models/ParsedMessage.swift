@@ -26,13 +26,19 @@ struct ParsedMessage: Codable {
     }
 }
 
-extension ParsedMessage: CustomStringConvertible {
-    var description: String {
+extension ParsedMessage {
+    var parsedDescription: String {
         let encoder = JSONEncoder()
         let data = try! encoder.encode(self)
         if let jsonString = String(data: data, encoding: .utf8)?.replacingOccurrences(of: "\\/", with: "/") {
-            return jsonString
+            var sanitizatedString = jsonString.replacingOccurrences(of: "{", with: "")
+            sanitizatedString = sanitizatedString.replacingOccurrences(of: "}", with: "")
+            
+            if sanitizatedString.count > 0 {
+                return jsonString
+            }
         }
-        return "error"
+        
+        return ""
     }
 }

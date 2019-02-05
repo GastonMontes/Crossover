@@ -52,7 +52,7 @@ class ChatPresenter: BasePresenter<ChatView>, ChatActions {
     func addReplyMessage(_ parsedMessage: ParsedMessage?) {
         var replyMessage = ChatMessageItem()
         if let parsedMessage = parsedMessage {
-            replyMessage.message = parsedMessage.description
+            replyMessage.message = parsedMessage.parsedDescription
             replyMessage.parsedMessage = parsedMessage
         } else {
             replyMessage.message = "msg_failed_processing_message"

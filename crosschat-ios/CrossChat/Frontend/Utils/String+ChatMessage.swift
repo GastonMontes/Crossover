@@ -16,6 +16,26 @@ extension String {
         selfMessage.format = .plainText
         selfMessage.date = Date()
         
-        return selfMessage;
+        return selfMessage
+    }
+    
+    func stringGetJSONChatMessage(completion: @escaping (_ chatMessageItem: ChatMessageItem?) -> Void) {
+        guard self.count > 0 else {
+            completion(nil)
+            return
+        }
+        
+        ChatManager.analyseChatMessage(of: self, completion: { parsedMessage in
+            if let parsedMessageDescription = parsedMessage?.parsedDescription, parsedMessageDescription.count > 0 {
+                var JSONMessage = ChatMessageItem()
+                JSONMessage.type = .reply
+                JSONMessage.format = .plainText
+                JSONMessage.date = Date()
+                JSONMessage.message = parsedMessageDescription
+                completion(JSONMessage)
+            } else {
+                completion(nil)
+            }
+        })
     }
 }

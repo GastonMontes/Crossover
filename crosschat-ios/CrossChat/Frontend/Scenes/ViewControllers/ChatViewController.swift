@@ -113,7 +113,17 @@ class ChatViewController: UIViewController {
         
         self.chatMessagesItems.append(messageText.stringGetSelfChatMesage())
         
+        messageText.stringGetJSONChatMessage(completion: { [weak self] chatMessageItem in
+            guard let chatMessageItem = chatMessageItem else {
+                return
+            }
+            
+            self?.chatMessagesItems.append(chatMessageItem)
+        })
+        
         self.chatPresenter.onChatMessageSubmitted(messageText: messageText)
+        
+        self.tableview.reloadData()
     }
     
     // MARK: - Keyboard functions.
