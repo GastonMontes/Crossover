@@ -26,16 +26,38 @@ extension String {
         }
         
         ChatManager.analyseChatMessage(of: self, completion: { parsedMessage in
-            if let parsedMessageDescription = parsedMessage?.parsedDescription, parsedMessageDescription.count > 0 {
-                var JSONMessage = ChatMessageItem()
-                JSONMessage.type = .reply
-                JSONMessage.format = .plainText
-                JSONMessage.date = Date()
-                JSONMessage.message = parsedMessageDescription
-                completion(JSONMessage)
-            } else {
+            guard let parsedMessageDescription = parsedMessage?.parsedDescription, parsedMessageDescription.count > 0 else {
                 completion(nil)
+                return
             }
+            
+            var JSONMessage = ChatMessageItem()
+            JSONMessage.type = .reply
+            JSONMessage.format = .plainText
+            JSONMessage.date = Date()
+            JSONMessage.message = parsedMessageDescription
+            completion(JSONMessage)
+        })
+    }
+    
+    func stringGetReplyChatMessage(completion: @escaping (_ chatMessageItem: ChatMessageItem?) -> Void) {
+        guard self.count > 0 else {
+            completion(nil)
+            return
+        }
+        
+        ChatManager.analyseChatMessage(of: self, completion: { parsedMessage in
+            guard let entities = parsedMessage?.allEntities, entities.count > 0 else {
+                completion(nil)
+                return
+            }
+            
+            var replyMessage = ChatMessageItem()
+            replyMessage.parsedMessage = parsedMessage
+            replyMessage.type = .reply
+            replyMessage.format = .richText
+            replyMessage.date = Date()
+            completion(replyMessage)
         })
     }
 }

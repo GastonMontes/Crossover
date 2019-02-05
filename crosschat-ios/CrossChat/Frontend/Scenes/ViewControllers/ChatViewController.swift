@@ -111,6 +111,7 @@ class ChatViewController: UIViewController {
         
         self.startLoading()
         
+        // Add rwa message.
         self.chatMessagesItems.append(messageText.stringGetSelfChatMesage())
         
         messageText.stringGetJSONChatMessage(completion: { [weak self] chatMessageItem in
@@ -121,9 +122,16 @@ class ChatViewController: UIViewController {
             self?.chatMessagesItems.append(chatMessageItem)
         })
         
-        self.chatPresenter.onChatMessageSubmitted(messageText: messageText)
+        messageText.stringGetReplyChatMessage(completion: { [weak self] chatMessageItem in
+            guard let chatMessageItem = chatMessageItem else {
+                return
+            }
+            
+            self?.chatMessagesItems.append(chatMessageItem)
+        })
         
         self.tableview.reloadData()
+        self.finishLoading()
     }
     
     // MARK: - Keyboard functions.
